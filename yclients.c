@@ -620,7 +620,7 @@ void *get_all_clients(void *param)
 	
 	while (get_count < total) {
 		char requestString[BUFSIZ];	
-		sprintf(requestString, "%s/clients/%d?page=%d&count=%d", URL, params->companyId, page, 100);
+		sprintf(requestString, "%s/clients/%ld?page=%d&count=%d", URL, params->companyId, page, 100);
 					
 		int count = 0;
 
