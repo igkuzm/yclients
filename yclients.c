@@ -806,10 +806,10 @@ int yclients_get_clients_with_search_pattern( struct yclients_client_t **clients
 	return 0;
 }
 
-struct yclients_client_t yclients_get_client (const char partner_token[21], const char *login, const char *password, long companyId, int clientId){
+struct yclients_client_t yclients_get_client (const char partner_token[21], const char *login, const char *password, long companyId, long clientId){
 	struct yclients_client_t client;
 	char requestString[BUFSIZ];	
-	sprintf(requestString, "%s/client/%ld/%d", URL, companyId, clientId);	
+	sprintf(requestString, "%s/client/%ld/%ld", URL, companyId, clientId);	
 	char *ret = curl_get_request(partner_token, login, password, requestString);	
 
 	cJSON *json = cJSON_Parse(ret);
@@ -1061,7 +1061,7 @@ void json_to_event(cJSON *json, struct yclients_event_t *event){
 }
 
 
-int yclients_get_events_for_client(struct yclients_event_t **_events, const char partner_token[21], const char *login, const char *password, long companyId, int clientId){
+int yclients_get_events_for_client(struct yclients_event_t **_events, const char partner_token[21], const char *login, const char *password, long companyId, long clientId){
 	int count = 0;	
 	struct yclients_event_t *events = malloc(sizeof(struct yclients_event_t));
 	if (events == NULL) {
@@ -1070,7 +1070,7 @@ int yclients_get_events_for_client(struct yclients_event_t **_events, const char
 	}
 
 	char requestString[BUFSIZ];		
-	sprintf(requestString, "%s/records/%ld?client_id=%d", URL, companyId, clientId);
+	sprintf(requestString, "%s/records/%ld?client_id=%ld", URL, companyId, clientId);
 	
 	char *ret = curl_get_request(partner_token, login, password, requestString);
 	cJSON *json = cJSON_Parse(curl_get_request(partner_token, login, password, requestString));
