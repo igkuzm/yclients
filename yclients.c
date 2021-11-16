@@ -827,7 +827,7 @@ int yclients_get_clients_with_search( struct yclients_client_t **_clients, const
 
 	struct yclients_client_t client;
 	char requestString[BUFSIZ];	
-	sprintf(requestString, "%s/company/%d/clients/search", URL, companyId);	
+	sprintf(requestString, "%s/company/%ld/clients/search", URL, companyId);	
 
 	char searchFields[BUFSIZ];
 	sprintf(searchFields, "");
