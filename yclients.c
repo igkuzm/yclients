@@ -809,7 +809,7 @@ int yclients_get_clients_with_search_pattern( struct yclients_client_t **clients
 struct yclients_client_t yclients_get_client (const char partner_token[21], const char *login, const char *password, long companyId, int clientId){
 	struct yclients_client_t client;
 	char requestString[BUFSIZ];	
-	sprintf(requestString, "%s/client/%d/%d", URL, companyId, clientId);	
+	sprintf(requestString, "%s/client/%ld/%d", URL, companyId, clientId);	
 	char *ret = curl_get_request(partner_token, login, password, requestString);	
 
 	cJSON *json = cJSON_Parse(ret);
