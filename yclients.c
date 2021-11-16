@@ -672,7 +672,7 @@ void *get_all_clients(void *param)
 	pthread_exit(0);
 }
 
-int yclients_get_all_clients(struct yclients_client_t **_clients, const char partner_token[21], const char *login, const char *password, int companyId, int (*callback)(int count, void *clients, bool hasFinished)){
+int yclients_get_all_clients(struct yclients_client_t **_clients, const char partner_token[21], const char *login, const char *password, long companyId, int (*callback)(int count, void *clients, bool hasFinished)){
 	int err = 0; //error
 		
 	struct yclients_client_t *clients = malloc(100 * sizeof(struct yclients_client_t));
@@ -720,7 +720,7 @@ int yclients_get_all_clients(struct yclients_client_t **_clients, const char par
 	return 0;	
 }
 
-int yclients_get_clients_with_request( struct yclients_client_t **_clients, const char partner_token[21], const char *login, const char *password, int companyId, const char *requestString){
+int yclients_get_clients_with_request( struct yclients_client_t **_clients, const char partner_token[21], const char *login, const char *password, long companyId, const char *requestString){
 	int count = 0;
 	struct yclients_client_t *clients = malloc(sizeof(struct yclients_client_t));
 	if (clients == NULL) {
@@ -771,19 +771,19 @@ int yclients_get_clients_with_request( struct yclients_client_t **_clients, cons
 	
 }
 
-int yclients_get_clients_with_search_phone( struct yclients_client_t **clients, const char partner_token[21], const char *login, const char *password, int companyId, long phone){
+int yclients_get_clients_with_search_phone( struct yclients_client_t **clients, const char partner_token[21], const char *login, const char *password, long companyId, long phone){
 	char requestString[BUFSIZ];	
 	sprintf(requestString, "%s/clients/%d?phone=%ld&page=%d&count=%d", URL, companyId, phone, 1, 60);	
 	return yclients_get_clients_with_request(clients, partner_token, login, password, companyId, requestString);
 }
 
-int yclients_get_clients_with_search_name( struct yclients_client_t **clients, const char partner_token[21], const char *login, const char *password, int companyId, const char *name){
+int yclients_get_clients_with_search_name( struct yclients_client_t **clients, const char partner_token[21], const char *login, const char *password, long companyId, const char *name){
 	char requestString[BUFSIZ];	
 	sprintf(requestString, "%s/clients/%d?fullname=%s&page=%d&count=%d", URL, companyId, name, 1, 60);	
 	return yclients_get_clients_with_request(clients, partner_token, login, password, companyId, requestString);	
 }
 
-int yclients_get_clients_with_search_pattern( struct yclients_client_t **clients, const char partner_token[21], const char *login, const char *password, int companyId, const char *searchPattern){
+int yclients_get_clients_with_search_pattern( struct yclients_client_t **clients, const char partner_token[21], const char *login, const char *password, long companyId, const char *searchPattern){
 	long phone;
 	if (sscanf(searchPattern, "%ld", &phone) == 1){
 		printf("SEARCH PHONE: %ld\n", phone);
@@ -806,7 +806,7 @@ int yclients_get_clients_with_search_pattern( struct yclients_client_t **clients
 	return 0;
 }
 
-struct yclients_client_t yclients_get_client (const char partner_token[21], const char *login, const char *password, int companyId, int clientId){
+struct yclients_client_t yclients_get_client (const char partner_token[21], const char *login, const char *password, long companyId, int clientId){
 	struct yclients_client_t client;
 	char requestString[BUFSIZ];	
 	sprintf(requestString, "%s/client/%d/%d", URL, companyId, clientId);	
@@ -823,7 +823,7 @@ struct yclients_client_t yclients_get_client (const char partner_token[21], cons
 	return client;
 }
 
-int yclients_get_clients_with_search( struct yclients_client_t **_clients, const char partner_token[21], const char *login, const char *password, int companyId,char **fields, int fields_count, const char *searchString){
+int yclients_get_clients_with_search( struct yclients_client_t **_clients, const char partner_token[21], const char *login, const char *password, long companyId,char **fields, int fields_count, const char *searchString){
 
 	struct yclients_client_t client;
 	char requestString[BUFSIZ];	
@@ -1061,7 +1061,7 @@ void json_to_event(cJSON *json, struct yclients_event_t *event){
 }
 
 
-int yclients_get_events_for_client(struct yclients_event_t **_events, const char partner_token[21], const char *login, const char *password, int companyId, int clientId){
+int yclients_get_events_for_client(struct yclients_event_t **_events, const char partner_token[21], const char *login, const char *password, long companyId, int clientId){
 	int count = 0;	
 	struct yclients_event_t *events = malloc(sizeof(struct yclients_event_t));
 	if (events == NULL) {
