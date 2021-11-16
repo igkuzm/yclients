@@ -153,7 +153,7 @@ struct yclients_client_t yclients_get_client
 				const char *login,					//login - usualy telephone number in format (79991234567) or email
 				const char *password,				//password
 				long companyId,						//ID of company
-				int clientId					    //ID of client
+				long clientId					    //ID of client
 );
 
 //get all events (visits) for clientId
@@ -164,7 +164,7 @@ int yclients_get_events_for_client
 				 const char *login,				   //login 
 				 const char *password,			   //password 
 				 long companyId,					   //ID of company
-				 int clientId					   //ID of client
+				 long clientId					   //ID of client
 );
 
 #ifdef __cplusplus
