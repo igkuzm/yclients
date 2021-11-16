@@ -114,7 +114,7 @@ int yclients_get_all_clients
 				const char partner_token[21],		//partner_token - YCLIENTS give it for developers
 				const char *login,					//login - usualy telephone number in format (79991234567) or email
 				const char *password,				//password
-				int companyId,						//ID of company
+				long companyId,						//ID of company
 				int (*callback)(                    //callback - return non 0 to stop function
 					int count,						//count of array
 					void *clients,					//array of clients (struct yclients_client_t)
@@ -129,7 +129,7 @@ int yclients_get_clients_with_search_pattern
 				const char partner_token[21],		//partner_token - YCLIENTS give it for developers
 				const char *login,					//login - usualy telephone number in format (79991234567) or email
 				const char *password,				//password
-				int companyId,						//ID of company
+				long companyId,						//ID of company
 				const char *searchPattern			//telephone number or name
 );
 
@@ -140,7 +140,7 @@ int yclients_get_clients_with_search
 				const char partner_token[21],		//partner_token - YCLIENTS give it for developers 
 				const char *login,					//login - usualy telephone number in format (79991234567) or email
 				const char *password,				//password 
-				int companyId,						//ID of company 
+				long companyId,						//ID of company 
 				char **fields,						//fields to return in *char[] - eg. char *fields[] = {"id", "name"} 
 				int fields_count,					//count of fields to return 
 				const char *searchString			//search string - eg. telephone number or name
@@ -152,7 +152,7 @@ struct yclients_client_t yclients_get_client
 				const char partner_token[21],		//partner_token - YCLIENTS give it for developers
 				const char *login,					//login - usualy telephone number in format (79991234567) or email
 				const char *password,				//password
-				int companyId,						//ID of company
+				long companyId,						//ID of company
 				int clientId					    //ID of client
 );
 
@@ -163,7 +163,7 @@ int yclients_get_events_for_client
 				 const char partner_token[21],     //partner token 
 				 const char *login,				   //login 
 				 const char *password,			   //password 
-				 int companyId,					   //ID of company
+				 long companyId,					   //ID of company
 				 int clientId					   //ID of client
 );
 
