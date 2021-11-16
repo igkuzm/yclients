@@ -22,7 +22,7 @@ struct thread_params{
 	const char *partner_token;
 	const char *login;
 	const char *password;
-	int companyId;
+	long companyId;
 	void *data;
 	int (*callback)(int, void*, bool);
 };
