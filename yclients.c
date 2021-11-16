@@ -1070,7 +1070,7 @@ int yclients_get_events_for_client(struct yclients_event_t **_events, const char
 	}
 
 	char requestString[BUFSIZ];		
-	sprintf(requestString, "%s/records/%d?client_id=%d", URL, companyId, clientId);
+	sprintf(requestString, "%s/records/%ld?client_id=%d", URL, companyId, clientId);
 	
 	char *ret = curl_get_request(partner_token, login, password, requestString);
 	cJSON *json = cJSON_Parse(curl_get_request(partner_token, login, password, requestString));
