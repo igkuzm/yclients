@@ -153,7 +153,7 @@ int yclients_get_clients_names_with_search
 				const char *login,					  //login - usualy telephone number in format (79991234567) or email
 				const char *password,				  //password 
 				long companyId,						  //ID of company 
-				const char *searchString			  //search string - eg. telephone number or name
+				const char *searchString,			  //search string - eg. telephone number or name
 				void context,						  //context to pass trow callback
 				int (*callback)(                      //callback - return non 0 to stop function
 					int error,						  //0 - no errors
