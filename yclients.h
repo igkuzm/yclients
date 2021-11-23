@@ -156,6 +156,7 @@ int yclients_get_clients_names_with_search
 				const char *searchString			  //search string - eg. telephone number or name
 				void context,						  //context to pass trow callback
 				int (*callback)(                      //callback - return non 0 to stop function
+					int error,						  //0 - no errors
 					struct yclients_client_t *client, //pointer of client (struct yclients_client_t)
 					void context				      //context callback return
 				)
