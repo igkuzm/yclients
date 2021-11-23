@@ -25,7 +25,7 @@
 
 //6672348
 
-int callback(int error, int count, void *context, struct yclients_client_t *clients){
+int callback(int error, int count, struct yclients_client_t *clients, void *context){
 	int i;
 	for (i = 0; i < count; ++i) {
 		printf("NAME: %s\n", clients[i].name);
