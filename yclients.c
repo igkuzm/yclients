@@ -897,19 +897,8 @@ int yclients_get_clients_names_with_search(const char partner_token[21], const c
 	char requestString[BUFSIZ];	
 	sprintf(requestString, "%s/company/%ld/clients/search", URL, companyId);	
 
-	char searchFields[BUFSIZ];
-	sprintf(searchFields, "");
-	
-	char *field = fields[0];
-	sprintf(searchFields, "%s\"%s\"", searchFields, field);
-	int i;
-	for (i = 1; i < fields_count; ++i) {
-		field = fields[i];	
-		sprintf(searchFields, "%s, \"%s\"", searchFields, field);
-	}
-
 	char postString[BUFSIZ];
-	sprintf(postString, "{\"page\": 1,\"page_size\": 100, \"fields\": [\"id\", \"name\"], \"order_by\": \"name\", \"order_by_direction\": \"asc\", \"operation\": \"AND\", \"filters\": [{\"type\": \"quick_search\", \"state\": {\"value\": \"%s\"}}]}", searchFields, searchString);
+	sprintf(postString, "{\"page\": 1,\"page_size\": 100, \"fields\": [\"id\", \"name\"], \"order_by\": \"name\", \"order_by_direction\": \"asc\", \"operation\": \"AND\", \"filters\": [{\"type\": \"quick_search\", \"state\": {\"value\": \"%s\"}}]}", searchString);
 
 	int count = 0;
 	struct yclients_client_t *clients = malloc(sizeof(struct yclients_client_t));
