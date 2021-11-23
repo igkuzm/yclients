@@ -146,6 +146,23 @@ int yclients_get_clients_with_search
 				const char *searchString			//search string - eg. telephone number or name
 );
 
+//Get clients with search pattern from yclients company. Use POST API.
+int yclients_get_clients_names_with_search
+( 
+				const char partner_token[21],		  //partner_token - YCLIENTS give it for developers 
+				const char *login,					  //login - usualy telephone number in format (79991234567) or email
+				const char *password,				  //password 
+				long companyId,						  //ID of company 
+				const char *searchString			  //search string - eg. telephone number or name
+				void context,
+				int (*callback)(                      //callback - return non 0 to stop function
+					struct yclients_client_t *client, //pointer of client (struct yclients_client_t)
+					void context				      //true if has got all records
+				)
+				
+);
+
+
 //Get client with clientId from yclients company.
 struct yclients_client_t yclients_get_client 
 (
