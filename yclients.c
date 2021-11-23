@@ -900,6 +900,13 @@ int yclients_get_clients_names_with_search(const char partner_token[21], const c
 	char postString[BUFSIZ];
 	sprintf(postString, "{\"page\": 1,\"page_size\": 100, \"fields\": [\"id\", \"name\"], \"order_by\": \"name\", \"order_by_direction\": \"asc\", \"operation\": \"AND\", \"filters\": [{\"type\": \"quick_search\", \"state\": {\"value\": \"%s\"}}]}", searchString);
 
+	int count = 0;
+	struct yclients_client_t *clients = malloc(sizeof(struct yclients_client_t));
+	if (clients == NULL) {
+		perror("malloc clients");
+		exit(EXIT_FAILURE);	
+	}	
+
 	char *ret = curl_post_request(partner_token, login, password, requestString, postString);	
 
 	cJSON *json = cJSON_Parse(ret);
@@ -935,8 +942,8 @@ int yclients_get_clients_names_with_search(const char partner_token[21], const c
 		}
 	}
 	
-	if (_clients) {
-		*_clients = clients;
+	if (callback) {
+		callback(0, count, clients, context);
 	}
 
 	return count;	
