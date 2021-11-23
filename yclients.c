@@ -898,7 +898,7 @@ int yclients_get_clients_names_with_search(const char partner_token[21], const c
 	sprintf(requestString, "%s/company/%ld/clients/search", URL, companyId);	
 
 	char postString[BUFSIZ];
-	sprintf(postString, "{\"page\": 1,\"page_size\": 100, \"fields\": [\"id\", \"name\"], \"order_by\": \"name\", \"order_by_direction\": \"asc\", \"operation\": \"AND\", \"filters\": [{\"type\": \"quick_search\", \"state\": {\"value\": \"%s\"}}]}", searchString);
+	sprintf(postString, "{\"page\": 1,\"page_size\": 100, \"fields\": [\"id\", \"name\", \"phone\"], \"order_by\": \"name\", \"order_by_direction\": \"asc\", \"operation\": \"AND\", \"filters\": [{\"type\": \"quick_search\", \"state\": {\"value\": \"%s\"}}]}", searchString);
 
 	int count = 0;
 	struct yclients_client_t *clients = malloc(sizeof(struct yclients_client_t));
