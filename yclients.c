@@ -892,7 +892,7 @@ int yclients_get_clients_with_search( struct yclients_client_t **_clients, const
 	return count;	
 }
 
-int yclients_get_clients_names_with_search(const char partner_token[21], const char *login, const char *password, long companyId, const char *searchString, void *context, int (*callback)(int error, struct yclients_client_t *client, void *context){
+int yclients_get_clients_names_with_search(const char partner_token[21], const char *login, const char *password, long companyId, const char *searchString, void *context, int (*callback)(int error, int count, struct yclients_client_t *clients, void *context){
 
 	char requestString[BUFSIZ];	
 	sprintf(requestString, "%s/company/%ld/clients/search", URL, companyId);	
