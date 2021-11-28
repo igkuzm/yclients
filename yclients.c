@@ -537,9 +537,10 @@ struct yclients_client_t yclients_get_client (const char partner_token[21], cons
 		cJSON *data = cJSON_GetObjectItem(json, "data");
 		if (cJSON_IsObject(data)) {
 			json_to_client(data, &client);
+			return client;
 		}
 	}
-	return client;
+	return NULL;
 }
 
 int yclients_get_clients_with_search( struct yclients_client_t **_clients, const char partner_token[21], const char *login, const char *password, long companyId,char **fields, int fields_count, const char *searchString){
