@@ -11,9 +11,9 @@ if (NOT DEFINED YCLIENTS_SOURCE_DIR)
   set(YCLIENTS_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 endif ()
 
-add_executable(yclients_test ${YCLIENTS_SOURCE_DIR}/test.c ${YCLIENTS_SOURCE_DIR}/cJSON.c)
+add_executable(yclients_test ${YCLIENTS_SOURCE_DIR}/test.c )
 
-add_library(yclients STATIC ${YCLIENTS_SOURCE_DIR}/yclients.c)
+add_library(yclients STATIC ${YCLIENTS_SOURCE_DIR}/yclients.c ${YCLIENTS_SOURCE_DIR}/cJSON.c)
 
 # Determine the location of the libraries to use based on the platform.
 if(ANDROID)
