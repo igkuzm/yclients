@@ -536,7 +536,7 @@ struct yclients_client_t yclients_get_client (const char partner_token[21], cons
 	if (cJSON_IsObject(json)) {
 		cJSON *data = cJSON_GetObjectItem(json, "data");
 		if (cJSON_IsObject(data)) {
-				json_to_client(data, &client);
+			json_to_client(data, &client);
 		}
 	}
 	return client;
