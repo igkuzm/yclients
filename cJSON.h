@@ -20,7 +20,6 @@
   THE SOFTWARE.
 */
 
-
 #ifndef cJSON__h
 #define cJSON__h
 
