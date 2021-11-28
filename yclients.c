@@ -540,7 +540,7 @@ struct yclients_client_t yclients_get_client (const char partner_token[21], cons
 			return client;
 		}
 	}
-	return NULL;
+	return 0;
 }
 
 int yclients_get_clients_with_search( struct yclients_client_t **_clients, const char partner_token[21], const char *login, const char *password, long companyId,char **fields, int fields_count, const char *searchString){
