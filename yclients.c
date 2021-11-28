@@ -6,6 +6,7 @@
  * Last Modified By  : Igor V. Sementsov <ig.kuzm@gmail.com>
  */
 #include "yclients.h"
+#include "cJSON.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
