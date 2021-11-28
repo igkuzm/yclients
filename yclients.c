@@ -607,65 +607,6 @@ int yclients_get_clients_with_search( struct yclients_client_t **_clients, const
 	return count;	
 }
 
-int yclients_get_clients_names_with_search(const char partner_token[21], const char *login, const char *password, long companyId, const char *searchString, void *context, int (*callback)(int error, int count, struct yclients_client_t *clients, void *context)){
-
-	printf("Start Searching...\n");
-
-	char requestString[BUFSIZ];	
-	sprintf(requestString, "%s/company/%ld/clients/search", URL, companyId);	
-
-	char postString[BUFSIZ];
-	sprintf(postString, "{\"page\": 1,\"page_size\": 100, \"fields\": [\"id\", \"name\", \"phone\"], \"order_by\": \"name\", \"order_by_direction\": \"asc\", \"operation\": \"AND\", \"filters\": [{\"type\": \"quick_search\", \"state\": {\"value\": \"%s\"}}]}", searchString);
-
-	int count = 0;
-	struct yclients_client_t *clients = malloc(sizeof(struct yclients_client_t));
-	if (clients == NULL) {
-		perror("malloc clients");
-		exit(EXIT_FAILURE);	
-	}	
-
-	char *ret = curl_post_request(partner_token, login, password, requestString, postString);	
-
-	cJSON *json = cJSON_Parse(ret);
-	free(ret);
-	if (cJSON_IsObject(json)) {
-		cJSON *success = cJSON_GetObjectItem(json, "success");
-		if (!success->valueint) {
-			return 0;
-		}		
-		cJSON *meta = cJSON_GetObjectItem(json, "meta");
-		if (cJSON_IsObject(meta)) {
-			cJSON *total_count = cJSON_GetObjectItem(meta, "total_count");
-			clients = realloc(clients, (total_count->valueint + 1) * sizeof(struct yclients_client_t));
-			if (clients == NULL) {
-				perror("realloc clients");
-				exit(EXIT_FAILURE);
-			}				
-		}		
-		cJSON *data = cJSON_GetObjectItem(json, "data");
-		if (cJSON_IsArray(data)) {
-			cJSON *item = data->child;			
-			while (item != NULL) {
-
-				struct yclients_client_t client;
-				
-				json_to_client(item, &client);
-				
-				clients[count] = client;
-				count++;
-				
-				item = item->next;				
-			}
-		}
-	}
-	
-	if (callback) {
-		callback(0, count, clients, context);
-	}
-
-	return count;	
-}
-
 //time_t time_tFromDatetime(char *datetime, struct tm *timestruct){
 	//struct tm tm;
 	////strptime(datetime, "'%Y-%m-%dT%H:%M:%S%z'", &tm);
