@@ -24,6 +24,8 @@ elseif(APPLE)
 	ADD_LIBRARY(curl STATIC IMPORTED)
 	SET_TARGET_PROPERTIES(curl PROPERTIES IMPORTED_LOCATION ${YCLIENTS_SOURCE_DIR}/resources/curl/iOS/libcurl.a)
   endif()
+elseif(WIN32)
+elseif(WIN64)
 endif()
 
 target_link_libraries(yclients curl z)
