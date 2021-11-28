@@ -19,6 +19,10 @@
 	#include "resources/curl/iOS/include/curl/curl.h"
 #elif defined __ANDROID__
     #include "resources/curl/android/include/curl/curl.h"
+#elif defined _WIN32
+	#include "resources/curl/windows/win32/include/curl/curl.h"
+#elif defined _WIN64
+	#include "resources/curl/windows/win64/include/curl/curl.h"
 #else
 	#include <curl/curl.h>
 #endif
