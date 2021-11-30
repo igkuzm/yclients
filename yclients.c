@@ -2,7 +2,7 @@
  * File              : yclients.c
  * Author            : Igor V. Sementsov <ig.kuzm@gmail.com>
  * Date              : 30.10.2021
- * Last Modified Date: 01.11.2021
+ * Last Modified Date: 30.11.2021
  * Last Modified By  : Igor V. Sementsov <ig.kuzm@gmail.com>
  */
 #include "yclients.h"
@@ -490,9 +490,9 @@ int yclients_get_clients_with_request( struct yclients_client_t **_clients, cons
 	
 }
 
-int yclients_get_clients_with_search_phone( struct yclients_client_t **clients, const char partner_token[21], const char *login, const char *password, long companyId, long phone){
+int yclients_get_clients_with_search_phone( struct yclients_client_t **clients, const char partner_token[21], const char *login, const char *password, long companyId, unsigned long phone){
 	char requestString[BUFSIZ];	
-	sprintf(requestString, "%s/clients/%ld?phone=%ld&page=%d&count=%d", URL, companyId, phone, 1, 60);	
+	sprintf(requestString, "%s/clients/%ld?phone=%lu&page=%d&count=%d", URL, companyId, phone, 1, 60);	
 	return yclients_get_clients_with_request(clients, partner_token, login, password, requestString);
 }
 
@@ -503,15 +503,15 @@ int yclients_get_clients_with_search_name( struct yclients_client_t **clients, c
 }
 
 int yclients_get_clients_with_search_pattern( struct yclients_client_t **clients, const char partner_token[21], const char *login, const char *password, long companyId, const char *searchPattern){
-	long phone;
-	if (sscanf(searchPattern, "%ld", &phone) == 1){
-		printf("SEARCH PHONE: %ld\n", phone);
+	unsigned long phone;
+	if (sscanf(searchPattern, "%lu", &phone) == 1){
+		printf("SEARCH PHONE: %lu\n", phone);
 		if (searchPattern[0] == '8') {
 			//change first number "8" to "7"
 			char *new_pattern = malloc(strlen(searchPattern) * sizeof(char) + 1);
 			strcpy(new_pattern, searchPattern);
 			new_pattern[0] = '7';
-			sscanf(new_pattern, "%ld", &phone);
+			sscanf(new_pattern, "%lu", &phone);
 			free(new_pattern);
 		}
 		//searching phone
